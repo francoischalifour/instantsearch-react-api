@@ -75,16 +75,7 @@ export default function Home() {
                           gridTemplateColumns: '1fr 2fr',
                         }}
                       >
-                        <img
-                          src={hit.artworkUrl}
-                          alt={hit.names.en}
-                          width={64}
-                        />
-                        <h3
-                          dangerouslySetInnerHTML={{
-                            __html: hit._highlightResult.names.en.value,
-                          }}
-                        />
+                        <Pokemon {...hit} />
                       </div>
                     )}
                   />
@@ -102,16 +93,7 @@ export default function Home() {
                             gridTemplateColumns: '1fr 2fr',
                           }}
                         >
-                          <img
-                            src={hit.artworkUrl}
-                            alt={hit.names.en}
-                            width={64}
-                          />
-                          <h3
-                            dangerouslySetInnerHTML={{
-                              __html: hit._highlightResult.names.en.value,
-                            }}
-                          />
+                          <Pokemon {...hit} />
                         </div>
                       )}
                     />
@@ -129,3 +111,19 @@ export default function Home() {
 }
 
 const sortByLabel = sortBy(compose(toLower, prop('label')));
+
+type PokemonProps = any;
+
+function Pokemon(props: PokemonProps) {
+  return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={props.artworkUrl} alt={props.names.en} width={64} />
+      <h3
+        dangerouslySetInnerHTML={{
+          __html: props._highlightResult.names.en.value,
+        }}
+      />
+    </>
+  );
+}
