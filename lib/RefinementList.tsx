@@ -50,7 +50,10 @@ export function RefinementList(props: RefinementListProps) {
 
         {props.showMore && (
           <button
-            className="ais-RefinementList-showMore"
+            className={cx(
+              'ais-RefinementList-showMore',
+              !canToggleShowMore && 'ais-RefinementList-showMore--disabled'
+            )}
             disabled={!canToggleShowMore}
             onClick={toggleShowMore}
           >

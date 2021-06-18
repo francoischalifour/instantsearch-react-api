@@ -5,6 +5,7 @@ import algoliasearch from 'algoliasearch/lite';
 import {
   Configure,
   CurrentRefinements,
+  Highlight,
   Hits,
   Index,
   InstantSearch,
@@ -35,7 +36,7 @@ export default function Home() {
         </h1>
 
         <InstantSearch searchClient={searchClient} indexName="kanto_pokedex">
-          <Configure hitsPerPage={20} />
+          <Configure hitsPerPage={10} />
 
           <div
             style={{
@@ -84,7 +85,6 @@ export default function Home() {
                 <div>
                   <h2>Galar</h2>
                   <Index indexName="galar_pokedex">
-                    <Configure hitsPerPage={20} />
                     <Hits
                       hitComponent={({ hit }) => (
                         <div
@@ -119,11 +119,9 @@ function Pokemon(props: PokemonProps) {
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={props.artworkUrl} alt={props.names.en} width={64} />
-      <h3
-        dangerouslySetInnerHTML={{
-          __html: props._highlightResult.names.en.value,
-        }}
-      />
+      <h3>
+        <Highlight hit={props} attribute={['names', 'en']} />
+      </h3>
     </>
   );
 }

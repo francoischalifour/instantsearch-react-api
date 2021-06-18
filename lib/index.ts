@@ -1,5 +1,6 @@
 export * from './Configure';
 export * from './CurrentRefinements';
+export * from './Highlight';
 export * from './Hits';
 export * from './InstantSearch';
 export * from './Pagination';
