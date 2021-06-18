@@ -3,6 +3,7 @@ import {
   RefinementListConnectorParams,
   RefinementListRenderState,
 } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
+import { noop } from './utils';
 import { useConnector } from './useConnector';
 
 export function useRefinementList(props: RefinementListConnectorParams) {
@@ -11,16 +12,16 @@ export function useRefinementList(props: RefinementListConnectorParams) {
     props,
     {
       items: [],
-      refine(_x) {},
+      refine: noop,
       canRefine: false,
       canToggleShowMore: false,
       createURL: () => '#',
       hasExhaustiveItems: false,
       isFromSearch: false,
       isShowingMore: false,
-      searchForItems() {},
-      sendEvent() {},
-      toggleShowMore() {},
+      searchForItems: noop,
+      sendEvent: noop,
+      toggleShowMore: noop,
     }
   );
 }

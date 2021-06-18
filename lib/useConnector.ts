@@ -10,12 +10,12 @@ export function useConnector<
 
   useEffect(() => {
     const createWidget = connector(setState);
-    const hits = createWidget(props);
+    const widget = createWidget(props);
 
-    searchIndex.addWidgets([hits]);
+    searchIndex.addWidgets([widget]);
 
     return () => {
-      searchIndex.removeWidgets([hits]);
+      searchIndex.removeWidgets([widget]);
     };
   }, [connector, searchIndex, props]);
 
