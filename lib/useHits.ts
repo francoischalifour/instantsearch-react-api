@@ -12,7 +12,7 @@ export function useHits(props: any) {
     props,
     {
       hits: [],
-      bindEvent: noop,
+      bindEvent: () => '',
       sendEvent: noop,
       results: undefined,
     }
