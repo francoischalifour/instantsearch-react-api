@@ -9,6 +9,7 @@ import {
   Hits,
   Index,
   InstantSearch,
+  Menu,
   Pagination,
   Panel,
   RefinementList,
@@ -59,6 +60,7 @@ export default function Home() {
                   attribute="generation"
                   transformItems={sortByLabel}
                 />
+                <Menu attribute="generation" transformItems={sortByLabel} />
               </Panel>
             </div>
             <div>
