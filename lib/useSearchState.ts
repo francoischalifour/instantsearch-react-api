@@ -18,6 +18,7 @@ export function useSearchState() {
   };
 
   return {
+    query: results.query,
     isSearchStalled: search._isSearchStalled,
     uiState: search.getUiState(),
     renderState: search.renderState,
