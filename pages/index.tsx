@@ -41,12 +41,18 @@ export default function Home() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: '1fr 2fr',
+              gridTemplateColumns: '250px 2fr',
+              gap: '2rem',
             }}
           >
             <div>
               <Panel header="Types">
-                <RefinementList attribute="types.name" showMore={true} />
+                <RefinementList
+                  attribute="types.name"
+                  showMore={true}
+                  searchable={true}
+                  searchablePlaceholder="Search types"
+                />
               </Panel>
               <Panel header="Generation">
                 <RefinementList

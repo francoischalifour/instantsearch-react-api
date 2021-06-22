@@ -7,21 +7,32 @@ import { noop } from './utils';
 import { useConnector } from './useConnector';
 
 export function useRefinementList(props: RefinementListConnectorParams) {
-  return useConnector<RefinementListConnectorParams, RefinementListRenderState>(
-    connectRefinementList,
-    props,
-    {
-      items: [],
-      refine: noop,
-      canRefine: false,
-      canToggleShowMore: false,
-      createURL: () => '#',
-      hasExhaustiveItems: false,
-      isFromSearch: false,
-      isShowingMore: false,
-      searchForItems: noop,
-      sendEvent: noop,
-      toggleShowMore: noop,
-    }
-  );
+  const state = useConnector<
+    RefinementListConnectorParams,
+    RefinementListRenderState
+  >(connectRefinementList, props, {
+    items: [],
+    refine: noop,
+    canRefine: false,
+    canToggleShowMore: false,
+    createURL: () => '#',
+    hasExhaustiveItems: false,
+    isFromSearch: false,
+    isShowingMore: false,
+    searchForItems: noop,
+    sendEvent: noop,
+    toggleShowMore: noop,
+  });
+
+  return {
+    ...state,
+    items: state.items.map((item) => ({
+      ...item,
+      _highlightResult: {
+        label: {
+          value: item.highlighted,
+        },
+      },
+    })),
+  };
 }

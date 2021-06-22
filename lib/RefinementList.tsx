@@ -1,25 +1,66 @@
 import { RefinementListConnectorParams } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
 import { useRefinementList } from './useRefinementList';
 import { PanelWrapper } from './PanelWrapper';
+import { SearchBox } from './components/SearchBox';
 import { cx } from './utils';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { Highlight } from './Highlight';
 
 export type RefinementListProps = RefinementListConnectorParams & {
   showMore?: boolean;
+  searchable?: boolean;
+  searchablePlaceholder?: string;
+  searchableIsAlwaysActive?: boolean;
+  searchableEscapeFacetValues?: boolean;
 };
 
 export function RefinementList(props: RefinementListProps) {
   const {
-    refine,
-    items,
     canRefine,
     canToggleShowMore,
-    toggleShowMore,
+    isFromSearch,
     isShowingMore,
+    items,
+    refine,
+    searchForItems,
+    toggleShowMore,
   } = useRefinementList(props);
+  const [query, setQuery] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    searchForItems(query);
+  }, [query]);
 
   return (
     <PanelWrapper canRefine={canRefine}>
       <div className="ais-RefinementList">
+        {props.searchable && (
+          <div className="ais-RefinementList-searchBox">
+            <SearchBox
+              inputRef={inputRef}
+              placeholder={props.searchablePlaceholder}
+              isSearchStalled={false}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                setQuery(event.currentTarget.value);
+              }}
+              onReset={() => {
+                setQuery('');
+              }}
+              onSubmit={() => {
+                if (items.length > 0) {
+                  refine(items[0].value);
+                  setQuery('');
+                }
+              }}
+              value={query}
+            />
+          </div>
+        )}
+        {props.searchable && isFromSearch && items.length === 0 && (
+          <div className="ais-RefinementList-noResults">No results.</div>
+        )}
+
         <ul className="ais-RefinementList-list">
           {items.map((item) => (
             <li
@@ -40,7 +81,7 @@ export function RefinementList(props: RefinementListProps) {
                   }}
                 />
                 <span className="ais-RefinementList-labelText">
-                  {item.label}
+                  <Highlight hit={item} attribute="label" />
                 </span>
                 <span className="ais-RefinementList-count">{item.count}</span>
               </label>

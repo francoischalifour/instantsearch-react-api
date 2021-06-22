@@ -18,8 +18,8 @@ export type HighlightHitParams<THit> = {
    * @default "mark"
    */
   tagName?: string;
-  highlightPreTag: string;
-  highlightPostTag: string;
+  highlightPreTag?: string;
+  highlightPostTag?: string;
 };
 
 export function Highlight<THit>({
