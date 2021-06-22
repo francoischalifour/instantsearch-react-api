@@ -8,7 +8,7 @@ import {
 import { PanelContext } from './PanelContext';
 import { cx } from './utils';
 
-type PanelWrapperProps = DetailedHTMLProps<
+type PanelProps = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 > & {
@@ -20,7 +20,7 @@ type PanelWrapperProps = DetailedHTMLProps<
   collapsible?: boolean;
 };
 
-export function Panel(props: PanelWrapperProps) {
+export function Panel(props: PanelProps) {
   const {
     header,
     footer,
@@ -90,11 +90,7 @@ export function Panel(props: PanelWrapperProps) {
       )}
 
       <div className="ais-Panel-body">
-        <PanelContext.Provider
-          value={{
-            onRenderState: setRenderState,
-          }}
-        >
+        <PanelContext.Provider value={{ onRenderState: setRenderState }}>
           {children}
         </PanelContext.Provider>
       </div>
