@@ -18,6 +18,7 @@ export function useSearchState() {
   };
 
   return {
+    isSearchStalled: search._isSearchStalled,
     uiState: search.getUiState(),
     renderState: search.renderState,
     helper: search.mainHelper,
