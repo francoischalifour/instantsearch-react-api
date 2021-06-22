@@ -21,6 +21,8 @@ const searchClient = algoliasearch(
   '3b24c36fac8bb7c1ee0cce05474849cc'
 );
 
+const isHidden = ({ canRefine }) => canRefine === false;
+
 export default function Home() {
   return (
     <div className="container">
@@ -47,7 +49,7 @@ export default function Home() {
             }}
           >
             <div>
-              <Panel header="Types">
+              <Panel header="Types" collapsible={true} isHidden={isHidden}>
                 <RefinementList
                   attribute="types.name"
                   showMore={true}
@@ -55,15 +57,11 @@ export default function Home() {
                   searchablePlaceholder="Search types"
                 />
               </Panel>
-              <Panel header="Generation">
-                <RefinementList
-                  attribute="generation"
-                  transformItems={sortByLabel}
-                />
+              <Panel header="Generation" collapsible={true} isHidden={isHidden}>
                 <Menu attribute="generation" transformItems={sortByLabel} />
               </Panel>
             </div>
-            <div>
+            <div style={{ minWidth: 650 }}>
               <SearchBox placeholder="Search Pokémon" />
               <CurrentRefinements />
 

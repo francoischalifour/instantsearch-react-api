@@ -1,6 +1,5 @@
 import { RefinementListConnectorParams } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
 import { useRefinementList } from './useRefinementList';
-import { PanelWrapper } from './PanelWrapper';
 import { SearchBox } from './components/SearchBox';
 import { cx } from './utils';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
@@ -33,75 +32,73 @@ export function RefinementList(props: RefinementListProps) {
   }, [query]);
 
   return (
-    <PanelWrapper canRefine={canRefine}>
-      <div className="ais-RefinementList">
-        {props.searchable && (
-          <div className="ais-RefinementList-searchBox">
-            <SearchBox
-              inputRef={inputRef}
-              placeholder={props.searchablePlaceholder}
-              isSearchStalled={false}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                setQuery(event.currentTarget.value);
-              }}
-              onReset={() => {
+    <div className="ais-RefinementList">
+      {props.searchable && (
+        <div className="ais-RefinementList-searchBox">
+          <SearchBox
+            inputRef={inputRef}
+            placeholder={props.searchablePlaceholder}
+            isSearchStalled={false}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setQuery(event.currentTarget.value);
+            }}
+            onReset={() => {
+              setQuery('');
+            }}
+            onSubmit={() => {
+              if (items.length > 0) {
+                refine(items[0].value);
                 setQuery('');
-              }}
-              onSubmit={() => {
-                if (items.length > 0) {
-                  refine(items[0].value);
-                  setQuery('');
-                }
-              }}
-              value={query}
-            />
-          </div>
-        )}
-        {props.searchable && isFromSearch && items.length === 0 && (
-          <div className="ais-RefinementList-noResults">No results.</div>
-        )}
+              }
+            }}
+            value={query}
+          />
+        </div>
+      )}
+      {props.searchable && isFromSearch && items.length === 0 && (
+        <div className="ais-RefinementList-noResults">No results.</div>
+      )}
 
-        <ul className="ais-RefinementList-list">
-          {items.map((item) => (
-            <li
-              key={item.value}
-              className={cx(
-                'ais-RefinementList-item',
-                item.isRefined && 'ais-RefinementList-item--selected'
-              )}
-            >
-              <label className="ais-RefinementList-label">
-                <input
-                  className="ais-RefinementList-checkbox"
-                  type="checkbox"
-                  value={item.value}
-                  checked={item.isRefined}
-                  onChange={() => {
-                    refine(item.value);
-                  }}
-                />
-                <span className="ais-RefinementList-labelText">
-                  <Highlight hit={item} attribute="label" />
-                </span>
-                <span className="ais-RefinementList-count">{item.count}</span>
-              </label>
-            </li>
-          ))}
-        </ul>
-
-        {props.showMore && (
-          <button
+      <ul className="ais-RefinementList-list">
+        {items.map((item) => (
+          <li
+            key={item.value}
             className={cx(
-              'ais-RefinementList-showMore',
-              !canToggleShowMore && 'ais-RefinementList-showMore--disabled'
+              'ais-RefinementList-item',
+              item.isRefined && 'ais-RefinementList-item--selected'
             )}
-            disabled={!canToggleShowMore}
-            onClick={toggleShowMore}
           >
-            {isShowingMore ? 'Show less' : 'Show more'}
-          </button>
-        )}
-      </div>
-    </PanelWrapper>
+            <label className="ais-RefinementList-label">
+              <input
+                className="ais-RefinementList-checkbox"
+                type="checkbox"
+                value={item.value}
+                checked={item.isRefined}
+                onChange={() => {
+                  refine(item.value);
+                }}
+              />
+              <span className="ais-RefinementList-labelText">
+                <Highlight hit={item} attribute="label" />
+              </span>
+              <span className="ais-RefinementList-count">{item.count}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+
+      {props.showMore && (
+        <button
+          className={cx(
+            'ais-RefinementList-showMore',
+            !canToggleShowMore && 'ais-RefinementList-showMore--disabled'
+          )}
+          disabled={!canToggleShowMore}
+          onClick={toggleShowMore}
+        >
+          {isShowingMore ? 'Show less' : 'Show more'}
+        </button>
+      )}
+    </div>
   );
 }

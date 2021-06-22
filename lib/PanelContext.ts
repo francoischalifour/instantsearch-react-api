@@ -1,8 +1,6 @@
-import { createContext, Dispatch, SetStateAction } from 'react';
-import { noop } from './utils/noop';
+import { createContext } from 'react';
 
-export const PanelContext = createContext<{
-  setCanRefine: Dispatch<SetStateAction<boolean>>;
-}>({
-  setCanRefine: noop,
-});
+export const PanelContext =
+  createContext<null | {
+    onRenderState: (params: Record<string, any>) => void;
+  }>(null);
