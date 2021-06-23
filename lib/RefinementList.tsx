@@ -5,13 +5,14 @@ import { cx } from './utils';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Highlight } from './Highlight';
 
-export type RefinementListProps = RefinementListConnectorParams & {
-  showMore?: boolean;
-  searchable?: boolean;
-  searchablePlaceholder?: string;
-  searchableIsAlwaysActive?: boolean;
-  searchableEscapeFacetValues?: boolean;
-};
+export type RefinementListProps = RefinementListConnectorParams &
+  React.ComponentProps<'div'> & {
+    showMore?: boolean;
+    searchable?: boolean;
+    searchablePlaceholder?: string;
+    searchableIsAlwaysActive?: boolean;
+    searchableEscapeFacetValues?: boolean;
+  };
 
 export function RefinementList(props: RefinementListProps) {
   const {
@@ -32,7 +33,7 @@ export function RefinementList(props: RefinementListProps) {
   }, [query]);
 
   return (
-    <div className="ais-RefinementList">
+    <div className={cx('ais-RefinementList', props.className)}>
       {props.searchable && (
         <div className="ais-RefinementList-searchBox">
           <SearchBox

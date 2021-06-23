@@ -1,13 +1,15 @@
 import { useCurrentRefinements } from './useCurrentRefinements';
 import { CurrentRefinementsConnectorParams } from 'instantsearch.js/es/connectors/current-refinements/connectCurrentRefinements';
+import { cx } from './utils';
 
-export type CurrentRefinementsProps = CurrentRefinementsConnectorParams;
+export type CurrentRefinementsProps = CurrentRefinementsConnectorParams &
+  React.ComponentProps<'div'>;
 
 export function CurrentRefinements(props: CurrentRefinementsProps) {
   const { items } = useCurrentRefinements(props);
 
   return (
-    <div className="ais-CurrentRefinements">
+    <div className={cx('ais-CurrentRefinements', props.className)}>
       <ul className="ais-CurrentRefinements-list">
         {items.map((item) => (
           <li key={item.attribute} className="ais-CurrentRefinements-item">

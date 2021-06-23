@@ -6,7 +6,7 @@ import {
 import { noop } from './utils/noop';
 import { useConnector } from './useConnector';
 
-export function useHits(props: any) {
+export function useHits(props: HitsConnectorParams) {
   return useConnector<HitsConnectorParams, HitsRenderState>(
     connectHits,
     props,

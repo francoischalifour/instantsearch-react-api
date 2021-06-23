@@ -2,7 +2,7 @@ import { MenuConnectorParams } from 'instantsearch.js/es/connectors/menu/connect
 import { useMenu } from './useMenu';
 import { cx } from './utils';
 
-export type MenuProps = MenuConnectorParams;
+export type MenuProps = MenuConnectorParams & React.ComponentProps<'div'>;
 
 export function Menu(props: MenuProps) {
   const {
@@ -15,7 +15,7 @@ export function Menu(props: MenuProps) {
   } = useMenu(props);
 
   return (
-    <div className="ais-Menu">
+    <div className={cx('ais-Menu', props.className)}>
       <ul className="ais-Menu-list">
         {items.map((item) => (
           <li

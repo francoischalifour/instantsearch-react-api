@@ -2,14 +2,15 @@ import { PaginationConnectorParams } from 'instantsearch.js/es/connectors/pagina
 import { usePagination } from './usePagination';
 import { cx } from './utils';
 
-export type PaginationProps = PaginationConnectorParams;
+export type PaginationProps = PaginationConnectorParams &
+  React.ComponentProps<'div'>;
 
 export function Pagination(props: PaginationProps) {
   const { refine, pages, currentRefinement, isFirstPage, isLastPage, nbPages } =
     usePagination(props);
 
   return (
-    <div className="ais-Pagination">
+    <div className={cx('ais-Pagination', props.className)}>
       <ul className="ais-Pagination-list">
         <PaginationItem
           className={cx(

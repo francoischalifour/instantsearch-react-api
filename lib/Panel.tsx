@@ -1,17 +1,8 @@
-import {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  ReactNode,
-  useEffect,
-  useState,
-} from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { PanelContext } from './PanelContext';
 import { cx } from './utils';
 
-type PanelProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
-> & {
+type PanelProps = React.ComponentProps<'div'> & {
   header?: string | JSX.Element;
   footer?: string | JSX.Element;
   children: ReactNode;
@@ -53,7 +44,8 @@ export function Panel(props: PanelProps) {
         'ais-Panel',
         hidden && 'ais-Panel-noRefinement',
         Boolean(collapsible) && 'ais-Panel--collapsible',
-        collapsed && 'ais-Panel--collapsed'
+        collapsed && 'ais-Panel--collapsed',
+        props.className
       )}
       hidden={hidden}
       {...rest}

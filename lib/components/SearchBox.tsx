@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, RefObject } from 'react';
+import { cx } from '../utils';
 
-export type SearchBoxProps = {
+export type SearchBoxProps = React.ComponentProps<'div'> & {
   inputRef: RefObject<HTMLInputElement>;
   isSearchStalled: boolean;
   onChange(event: ChangeEvent): void;
@@ -28,7 +29,7 @@ export function SearchBox(props: SearchBoxProps) {
   }
 
   return (
-    <div className="ais-SearchBox">
+    <div className={cx('ais-SearchBox', props.className)}>
       <form
         className="ais-SearchBox-form"
         noValidate

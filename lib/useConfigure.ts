@@ -7,7 +7,9 @@ import { useMemo } from 'react';
 import { noop } from './utils/noop';
 import { useConnector } from './useConnector';
 
-export function useConfigure(searchParameters: any) {
+export function useConfigure(
+  searchParameters: ConfigureConnectorParams['searchParameters']
+) {
   const params = useMemo(() => ({ searchParameters }), [searchParameters]);
 
   return useConnector<ConfigureConnectorParams, ConfigureRenderState>(

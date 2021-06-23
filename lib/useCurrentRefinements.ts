@@ -6,7 +6,9 @@ import {
 import { noop } from './utils/noop';
 import { useConnector } from './useConnector';
 
-export function useCurrentRefinements(props: any) {
+export function useCurrentRefinements(
+  props: CurrentRefinementsConnectorParams
+) {
   return useConnector<
     CurrentRefinementsConnectorParams,
     CurrentRefinementsRenderState
