@@ -5,7 +5,9 @@ export function useInstantSearchContext() {
   const context = useContext(InstantSearchContext);
 
   if (context === null) {
-    throw new Error('Hook must be used in InstantSearchContext.');
+    throw new Error(
+      '`useInstantSearchContext` must be used within `InstantSearchContext.Provider`.'
+    );
   }
 
   return context;

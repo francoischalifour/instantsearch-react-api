@@ -8,7 +8,7 @@ export function useConnector<
 >(connector: Function, props: TProps, initialState: TState) {
   const searchIndex = useIndexContext();
   const panel = usePanelContext();
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState(() => initialState);
 
   useEffect(() => {
     const createWidget = connector(setState);

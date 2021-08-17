@@ -4,11 +4,11 @@ import {
   PaginationRenderState,
 } from 'instantsearch.js/es/connectors/pagination/connectPagination';
 import { useConnector } from './useConnector';
-import { useSearchState } from './useSearchState';
+import { useSearchIndexResults } from './useSearchIndexResults';
 import { noop } from './utils';
 
 export function usePagination(props: PaginationConnectorParams) {
-  const { results } = useSearchState();
+  const results = useSearchIndexResults();
 
   return useConnector<PaginationConnectorParams, PaginationRenderState>(
     connectPagination,

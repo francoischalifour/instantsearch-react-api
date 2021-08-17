@@ -18,3 +18,8 @@ export * from './useMenu';
 export * from './usePagination';
 export * from './useRefinementList';
 export * from './useSearchBox';
+export * from './useSearchIndexResults';
+export * from './useSearchIndexUiState';
+export * from './useSearchResults';
+export * from './useSearchStatus';
+export * from './useSearchUiState';

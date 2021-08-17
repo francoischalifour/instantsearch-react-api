@@ -124,7 +124,12 @@ function Pokemon(props: PokemonProps) {
   return (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={props.artworkUrl} alt={props.names.en} width={64} />
+      <img
+        src={`https://res.cloudinary.com/xoxox/image/upload/q_auto,w_64/v1626513032/pokedex/home/${props.nationalId}.png`}
+        alt={props.names.en}
+        width={64}
+        height={64}
+      />
       <h3>
         <Highlight hit={props} attribute={['names', 'en']} />
       </h3>

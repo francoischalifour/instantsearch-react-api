@@ -12,7 +12,8 @@
   "dependencies": {
     "@types/ramda": "0.27.40",
     "algoliasearch": "4.9.3",
-    "instantsearch.js": "4.24.0-experimental-typescript.0",
+    "dequal": "2.0.2",
+    "instantsearch.js": "4.27.1",
     "next": "11.0.0",
     "ramda": "0.27.1",
     "react": "18.0.0-alpha-43f4cc160",
