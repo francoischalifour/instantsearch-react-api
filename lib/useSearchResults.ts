@@ -19,7 +19,7 @@ export function useSearchResults<THit = any>() {
         search.mainIndex,
         ...search.mainIndex.getWidgets().filter(isIndexWidget),
       ];
-      const nextResults = indexWidgets.flatMap((widget) => ({
+      const nextResults = indexWidgets.map((widget) => ({
         query: '',
         page: 0,
         hitsPerPage: 20,
