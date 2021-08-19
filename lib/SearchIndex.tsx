@@ -1,12 +1,14 @@
 import { IndexContext } from './IndexContext';
-import { useIndex } from './useIndex';
+import { useIndex, UseIndexProps } from './useIndex';
 
-export function Index(props: any) {
+export type IndexProps = UseIndexProps & {
+  children: React.ReactNode;
+};
+
+export function Index({ children, ...props }: IndexProps) {
   const index = useIndex(props);
 
   return (
-    <IndexContext.Provider value={index}>
-      {props.children}
-    </IndexContext.Provider>
+    <IndexContext.Provider value={index}>{children}</IndexContext.Provider>
   );
 }
