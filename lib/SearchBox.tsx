@@ -25,6 +25,12 @@ export function SearchBox(props: SearchBoxProps) {
     refine(value);
   }, [refine, value]);
 
+  useEffect(() => {
+    if (query !== value) {
+      setValue(query);
+    }
+  }, [query]);
+
   return (
     <SearchBoxComponent
       className={props.className}
