@@ -2,6 +2,7 @@ import connectConfigure from 'instantsearch.js/cjs/connectors/configure/connectC
 import {
   ConfigureConnectorParams,
   ConfigureRenderState,
+  ConfigureWidgetDescription,
 } from 'instantsearch.js/es/connectors/configure/connectConfigure';
 import { useMemo } from 'react';
 import { noop } from './utils/noop';
@@ -12,11 +13,11 @@ export function useConfigure(
 ) {
   const params = useMemo(() => ({ searchParameters }), [searchParameters]);
 
-  return useConnector<ConfigureConnectorParams, ConfigureRenderState>(
-    connectConfigure,
-    params,
-    {
-      refine: noop,
-    }
-  );
+  return useConnector<
+    ConfigureConnectorParams,
+    ConfigureRenderState,
+    ConfigureWidgetDescription
+  >(connectConfigure, params, {
+    refine: noop,
+  });
 }

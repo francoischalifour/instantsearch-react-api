@@ -1,4 +1,4 @@
-import { dequal } from 'dequal';
+import { dequal } from 'dequal/lite';
 import { useEffect, useState } from 'react';
 import { useInstantSearchContext } from './useInstantSearchContext';
 

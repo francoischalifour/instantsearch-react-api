@@ -1,20 +1,18 @@
-import { InstantSearchOptions } from 'instantsearch.js';
-
-import { useInstantSearch } from './useInstantSearch';
+import { useInstantSearch, UseInstantSearchProps } from './useInstantSearch';
 import { IndexContext } from './IndexContext';
 import { InstantSearchContext } from './InstantSearchContext';
 
-type InstantSearchProps = InstantSearchOptions & {
+type InstantSearchProps = UseInstantSearchProps & {
   children: React.ReactNode;
 };
 
-export function InstantSearch(props: InstantSearchProps) {
+export function InstantSearch({ children, ...props }: InstantSearchProps) {
   const search = useInstantSearch(props);
 
   return (
     <InstantSearchContext.Provider value={search}>
       <IndexContext.Provider value={search.mainIndex}>
-        {props.children}
+        {children}
       </IndexContext.Provider>
     </InstantSearchContext.Provider>
   );

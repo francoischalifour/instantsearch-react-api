@@ -2,6 +2,7 @@ import connectRefinementList from 'instantsearch.js/cjs/connectors/refinement-li
 import {
   RefinementListConnectorParams,
   RefinementListRenderState,
+  RefinementListWidgetDescription,
 } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
 import { noop } from './utils';
 import { useConnector } from './useConnector';
@@ -9,7 +10,8 @@ import { useConnector } from './useConnector';
 export function useRefinementList(props: RefinementListConnectorParams) {
   const state = useConnector<
     RefinementListConnectorParams,
-    RefinementListRenderState
+    RefinementListRenderState,
+    RefinementListWidgetDescription
   >(connectRefinementList, props, {
     items: [],
     refine: noop,

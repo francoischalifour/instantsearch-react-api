@@ -5,6 +5,7 @@ export function useSearchIndexResults() {
   const { results } = useSearchResults();
   const searchIndex = useIndexContext();
   const indexName = searchIndex.getIndexName();
+  const originalResults = results.find((result) => result.index === indexName);
   const indexResults = {
     query: '',
     page: 0,
@@ -17,7 +18,8 @@ export function useSearchIndexResults() {
     exhaustiveFacetsCount: true,
     processingTimeMS: 0,
     index: indexName,
-    ...results.find((result) => result.index === indexName),
+    _isFallbackResult: !originalResults,
+    ...originalResults,
   };
 
   return indexResults;

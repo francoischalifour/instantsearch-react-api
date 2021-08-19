@@ -1,11 +1,8 @@
-import { MultiResponse, Widget } from 'instantsearch.js';
-import { IndexWidget } from 'instantsearch.js/es/widgets/index/index';
-import { useEffect, useState } from 'react';
-import { useInstantSearchContext } from './useInstantSearchContext';
+import { MultiResponse } from 'instantsearch.js';
 
-function isIndexWidget(widget: Widget | IndexWidget): widget is IndexWidget {
-  return widget.$$type === 'ais.index';
-}
+import { useEffect, useState } from 'react';
+import { isIndexWidget } from './isIndexWidget';
+import { useInstantSearchContext } from './useInstantSearchContext';
 
 export function useSearchResults<THit = any>() {
   const search = useInstantSearchContext();
@@ -31,7 +28,7 @@ export function useSearchResults<THit = any>() {
         exhaustiveFacetsCount: true,
         processingTimeMS: 0,
         index: widget.getIndexName(),
-        ...widget.getResults()?._rawResults,
+        ...widget.getResults()?._rawResults[0],
       }));
 
       setResults({ results: nextResults });
